@@ -6,6 +6,7 @@
 #include <glm/mat4x4.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include <game_engine/CameraNav.h>
 #include <game_engine/Exception.h>
 
 namespace {
@@ -77,8 +78,8 @@ Game::Game(unsigned int windowWidth, unsigned int windowHeight, const std::strin
     this->skyboxShader->setUniformBlockBinding(matricesUboName, this->matricesUbo->getBindingPoint());
 
     // Setup camera
-    this->cam = std::make_unique<Camera>(45.0f, static_cast<float>(this->frameBufferWidth) / this->frameBufferHeight,
-                                         0.1f, 1000.0f);
+    this->cam = std::make_unique<CameraNav>(45.0f, static_cast<float>(this->frameBufferWidth) / this->frameBufferHeight,
+                                            0.1f, 1000.0f);
 
     // Setup directional light
     this->directionalLight = std::make_unique<DirectionalLight>(
@@ -158,14 +159,34 @@ void Game::keyCallback(GLFWwindow *window, int key, int scancode, int action, in
     }
 
     this->cam->keyCallback(window, key, action, mods);
+
+    for (auto &gameObject : this->worldList) {
+        gameObject->keyCallback(window, scancode, action, mods);
+    }
 }
 
 void Game::cursorPositionCallback(GLFWwindow *window, double x, double y) {
     this->cam->cursorPositionCallback(window, x, y);
+
+    for (auto &gameObject : this->worldList) {
+        gameObject->cursorPositionCallback(window, x, y);
+    }
+}
+
+void Game::mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
+    this->cam->mouseButtonCallback(window, button, action, mods);
+
+    for (auto &gameObject : this->worldList) {
+        gameObject->mouseButtonCallback(window, button, action, mods);
+    }
 }
 
 void Game::scrollCallback(GLFWwindow *window, double xOffset, double yOffset) {
     this->cam->scrollCallback(window, xOffset, yOffset);
+
+    for (auto &gameObject : this->worldList) {
+        gameObject->scrollCallback(window, xOffset, yOffset);
+    }
 }
 
 GLFWwindow* Game::getWindow() {return this->window.get();}

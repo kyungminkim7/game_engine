@@ -9,9 +9,7 @@
 namespace ge {
 
 ///
-/// \brief First person shooter camera with a perspective view.
-///
-/// This camera pitches and yaws but does not allow roll.
+/// \brief Represents a Camera.
 ///
 class Camera : public GameObject {
 public:
@@ -43,44 +41,6 @@ public:
     ///
     void onUpdate(std::chrono::duration<float> updateDuration) override;
 
-    ///
-    /// \brief Camera movement controls through keyboard input.
-    ///
-    /// Implements the following movement controls:
-    ///     1. 'w' - forward
-    ///     2. 's' - backward
-    ///     3. 'a' - left
-    ///     4. 'd' - right
-    ///
-    /// This movement speed may be modified through Camera::setLinearSpeed().
-    ///
-    /// \param window The window that received the event.
-    /// \param key The key that was pressed/released.
-    /// \param action GLFW_PRESS, GLFW_RELEASE or GLFW_REPEAT.
-    /// \param mods Bit field describing which modifier keys were held down.
-    ///
-    void keyCallback(GLFWwindow *window, int key, int action, int mods) override;
-
-    ///
-    /// \brief Controls camera through cursor movement.
-    ///
-    /// The camera rotates in place following the cursor movement.
-    /// The sensitivity of this movement may be modified through Camera::setCursorSensitivity().
-    ///
-    /// \param window The window that received the event.
-    /// \param cursorX The new cursor x-coordinate, relative to the left edge of the client area.
-    /// \param cursorY The new cursor y-coordinate, relative to the top edge of the client area.
-    ///
-    void cursorPositionCallback(GLFWwindow *window, double cursorX, double cursorY) override;
-
-    ///
-    /// \brief onScrollInput Controls camera zoom through scrolling.
-    /// \param window The window that received the event
-    /// \param xOffset The scroll offset along the x-axis.
-    /// \param yOffset The scroll offset along the y-axis.
-    ///
-    void scrollCallback(GLFWwindow *window, double xOffset, double yOffset) override;
-
     void setMaxFov(float fov_deg);
 
     ///
@@ -90,7 +50,8 @@ public:
     ///
     /// \param fov_deg
     ///
-    void setCurrentFov(float fov_deg);
+    void setCurrentFov_deg(float fov_deg);
+    float getCurrentFov_deg() const;
 
     void setAspectRatioWidthToHeight(float aspectRatioWidthToHeight);
 
@@ -101,6 +62,14 @@ public:
     /// \param linearSpeed Linear movement speed (m/s).
     ///
     void setLinearSpeed(float linearSpeed);
+    float getLinearSpeed() const;
+
+    void moveForward();
+    void moveBackward();
+    void moveLeft();
+    void moveRight();
+    void stopForwardBackwardMovement();
+    void stopSidewaysMovement();
 
     ///
     /// \brief setCursorSenstivity Sets the sensitivity of the camera's rotation following
@@ -108,14 +77,17 @@ public:
     /// \param cursorSensitivity
     ///
     void setCursorSenstivity(float cursorSensitivity);
+    float getCursorSensitivity() const;
 
     ///
     /// \brief setScrollSensitivity Sets the sensitivity of the camera's zoom through scrolling.
     /// \param scrollSensitivity
     ///
     void setScrollSensitivity(float scrollSensitivity);
+    float getScrollSensitivity() const;
 
     void setHorizontalRotationAxis(const glm::vec3& horizontalRotationAxis);
+    glm::vec3 getHorizontalRotationAxis() const;
 
 private:
     float maxFov_deg;
@@ -133,12 +105,37 @@ private:
     glm::vec3 horizontalRotationAxis;
 
     glm::mat4 projectionMatrix {1.0f};
-    glm::mat4 viewMatrix {1.0f};
-
-    bool firstCursorPositionReceived = false;
-
-    double lastCursorX = 0.0;
-    double lastCursorY = 0.0;
 };
+
+inline float Camera::getCurrentFov_deg() const {return this->currentFov_deg;}
+
+inline float Camera::getLinearSpeed() const {return this->linearSpeed;}
+
+inline void Camera::moveForward() {this->linearVelocity.x = this->linearSpeed;}
+inline void Camera::moveBackward() {this->linearVelocity.x = -this->linearSpeed;}
+inline void Camera::moveLeft() {this->linearVelocity.y = this->linearSpeed;}
+inline void Camera::moveRight() {this->linearVelocity.y = -this->linearSpeed;}
+inline void Camera::stopForwardBackwardMovement() {this->linearVelocity.x = 0;}
+inline void Camera::stopSidewaysMovement() {this->linearVelocity.y = 0;}
+
+inline void Camera::setCursorSenstivity(float cursorSensitivity) {
+    this->cursorSensitivity = cursorSensitivity;
+}
+
+inline float Camera::getCursorSensitivity() const {return this->cursorSensitivity;}
+
+inline void Camera::setScrollSensitivity(float scrollSensitivity) {
+    this->scrollSensitivity = scrollSensitivity;
+}
+
+inline float Camera::getScrollSensitivity() const {return this->scrollSensitivity;}
+
+inline void Camera::setHorizontalRotationAxis(const glm::vec3 &yawAxis) {
+    this->horizontalRotationAxis = yawAxis;
+}
+
+inline glm::vec3 Camera::getHorizontalRotationAxis() const {
+    return this->horizontalRotationAxis;
+}
 
 } // namespace ge

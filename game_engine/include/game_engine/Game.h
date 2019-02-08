@@ -66,6 +66,7 @@ public:
     void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
     virtual void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
     virtual void cursorPositionCallback(GLFWwindow *window, double x, double y);
+    virtual void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods);
     virtual void scrollCallback(GLFWwindow *window, double xOffset, double yOffset);
     ///@}
 

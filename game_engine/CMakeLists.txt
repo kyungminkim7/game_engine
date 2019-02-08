@@ -6,6 +6,8 @@ find_package(glfw3 REQUIRED)
 
 add_library(${PROJECT_NAME} SHARED
     "src/Camera.cpp"
+    "src/CameraFPV.cpp"
+    "src/CameraNav.cpp"
     "src/DirectionalLight.cpp"
     "src/Game.cpp"
     "src/GameObject.cpp"

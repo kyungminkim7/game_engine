@@ -73,6 +73,18 @@ public:
     virtual void cursorPositionCallback(GLFWwindow *window, double cursorX, double cursorY);
 
     ///
+    /// \brief mouseButtonCallback Controls for when mouse button is pressed/released.
+    ///
+    /// The base implementation does nothing.
+    ///
+    /// \param window The window that received the event.
+    /// \param button The mouse button that was pressed/released.
+    /// \param action GLFW_PRESS/GLFW_RELEASE.
+    /// \param mods Bit field describing which modifier keys were held down.
+    ///
+    virtual void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods);
+
+    ///
     /// \brief scrollCallback Controls based on scrolling input.
     ///
     /// The base implementation does nothing.
@@ -82,7 +94,6 @@ public:
     /// \param yOffset The scroll offset along the y-axis.
     ///
     virtual void scrollCallback(GLFWwindow *window, double xOffset, double yOffset);
-
 
     glm::mat4 getModelMatrix() const;
 
