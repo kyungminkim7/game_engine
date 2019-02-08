@@ -36,6 +36,7 @@ public:
     static std::string shadersDir;
     static std::string modelsDir;
     static std::string skyboxesDir;
+    static std::string imagesDir;
     ///@}
 
     ///
@@ -108,6 +109,9 @@ protected:
     void setDirectionalLight(std::unique_ptr<DirectionalLight> directionalLight);
     DirectionalLight* getDirectionalLight();
 
+    int getFrameBufferWidth() const;
+    int getFrameBufferHeight() const;
+
 private:
     ///
     /// \brief update Updates all game objects.
@@ -143,5 +147,8 @@ private:
 
     std::unique_ptr<DirectionalLight> directionalLight;
 };
+
+inline int Game::getFrameBufferWidth() const {return this->frameBufferWidth;}
+inline int Game::getFrameBufferHeight() const {return this->frameBufferHeight;}
 
 } // namespace ge

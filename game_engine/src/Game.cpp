@@ -23,6 +23,7 @@ std::string Game::baseProjectPath = "../../";
 std::string Game::shadersDir = "shaders/";
 std::string Game::modelsDir = "models/";
 std::string Game::skyboxesDir = "skyboxes/";
+std::string Game::imagesDir = "images/";
 
 std::unique_ptr<Game> Game::New(unsigned int windowWidth, unsigned int windowHeight,
                                 const std::string &windowTitle) {

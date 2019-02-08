@@ -95,6 +95,8 @@ public:
     ///
     virtual void scrollCallback(GLFWwindow *window, double xOffset, double yOffset);
 
+    void setMesh(std::unique_ptr<Mesh> mesh);
+
     glm::mat4 getModelMatrix() const;
 
     ///
@@ -176,14 +178,14 @@ public:
 
     GameObject& setScale(const glm::vec3 &scale);
 
-    void setShininess(float shininess);
+    void setSpecularExponent(float specularExponent);
 
 private:
-    using Meshes = std::vector<std::unique_ptr<ge::Mesh>>;
+    using Meshes = std::vector<std::unique_ptr<Mesh>>;
     Model model;
 
     std::shared_ptr<Meshes> meshes;
-    float shininess = 64.0f;
+    float specularExponent = 64.0f;
 };
 
 inline glm::mat4 GameObject::getModelMatrix() const {return this->model.getModelMatrix();}
@@ -253,8 +255,8 @@ inline GameObject& GameObject::setScale(const glm::vec3& scale) {
     return *this;
 }
 
-inline void GameObject::setShininess(float shininess) {
-    this->shininess = shininess;
+inline void GameObject::setSpecularExponent(float specularExponent) {
+    this->specularExponent = specularExponent;
 }
 
 } // namespace ge

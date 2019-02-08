@@ -98,7 +98,7 @@ void GameObject::onUpdate(std::chrono::duration<float> updateDuration) {}
 void GameObject::render(ShaderProgram *shader) {
     this->model.render(shader);
 
-    shader->setUniform("material.shininess", this->shininess);
+    shader->setUniform("material.specularExponent", this->specularExponent);
 
     for (const auto& mesh : *this->meshes) {
         mesh->render(shader);
@@ -109,5 +109,10 @@ void GameObject::keyCallback(GLFWwindow *window, int key, int action, int mods) 
 void GameObject::cursorPositionCallback(GLFWwindow *window, double cursorX, double cursorY) {}
 void GameObject::mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {}
 void GameObject::scrollCallback(GLFWwindow *window, double xOffset, double yOffset) {}
+
+void GameObject::setMesh(std::unique_ptr<Mesh> mesh) {
+    this->meshes->clear();
+    this->meshes->push_back(std::move(mesh));
+}
 
 } // namespace ge

@@ -16,6 +16,7 @@ add_library(${PROJECT_NAME} SHARED
     "src/Light.cpp"
     "src/Mesh.cpp"
     "src/Model.cpp"
+    "src/Plane.cpp"
     "src/PointLight.cpp"
     "src/ShaderProgram.cpp"
     "src/Skybox.cpp"
