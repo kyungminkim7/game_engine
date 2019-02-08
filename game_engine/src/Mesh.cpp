@@ -97,9 +97,16 @@ Mesh::Mesh(const aiMesh &mesh, const aiMaterial &material, const std::string &te
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
     // Load textures.
-    this->ambientTextures = loadTexturesFromMaterial(material, aiTextureType_AMBIENT, textureDirectory);
-    this->diffuseTextures = loadTexturesFromMaterial(material, aiTextureType_DIFFUSE, textureDirectory);
-    this->specularTextures = loadTexturesFromMaterial(material, aiTextureType_SPECULAR, textureDirectory);
+    try {
+        this->ambientTextures = loadTexturesFromMaterial(material, aiTextureType_AMBIENT, textureDirectory);
+        this->diffuseTextures = loadTexturesFromMaterial(material, aiTextureType_DIFFUSE, textureDirectory);
+        this->specularTextures = loadTexturesFromMaterial(material, aiTextureType_SPECULAR, textureDirectory);
+    } catch (std::exception&) {
+        glDeleteVertexArrays(1, &this->vao);
+        glDeleteBuffers(1, &this->vbo);
+        glDeleteBuffers(1, &this->ebo);
+        throw;
+    }
 }
 
 Mesh::Mesh(const std::vector<float> &positions,
@@ -159,10 +166,18 @@ Mesh::Mesh(const std::vector<float> &positions,
     glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+    // Load textures
     if (!textureFilepath.empty()) {
-        ge::Texture2D texture(textureFilepath);
-        this->ambientTextures.push_back(texture);
-        this->diffuseTextures.push_back(texture);
+        try {
+            ge::Texture2D texture(textureFilepath);
+            this->ambientTextures.push_back(texture);
+            this->diffuseTextures.push_back(texture);
+        } catch (std::exception&) {
+            glDeleteVertexArrays(1, &this->vao);
+            glDeleteBuffers(1, &this->vbo);
+            glDeleteBuffers(1, &this->ebo);
+            throw;
+        }
     }
 }
 

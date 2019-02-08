@@ -102,8 +102,8 @@ void GameObject::render(ShaderProgram *shader) {
     }
 }
 
-void GameObject::onKeyInput(GLFWwindow *window, int key, int action, int mods) {}
-void GameObject::onCursorMoved(GLFWwindow *window, double cursorX, double cursorY) {}
-void GameObject::onScrollInput(GLFWwindow *window, double xOffset, double yOffset) {}
+void GameObject::keyCallback(GLFWwindow *window, int key, int action, int mods) {}
+void GameObject::cursorPositionCallback(GLFWwindow *window, double cursorX, double cursorY) {}
+void GameObject::scrollCallback(GLFWwindow *window, double xOffset, double yOffset) {}
 
 } // namespace ge

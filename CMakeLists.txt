@@ -19,8 +19,4 @@ target_include_directories(stb INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/stb>
 )
 
-target_compile_definitions(stb INTERFACE
-    STB_IMAGE_IMPLEMENTATION
-)
-
 add_subdirectory(game_engine)

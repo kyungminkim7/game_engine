@@ -22,7 +22,7 @@ void Camera::onUpdate(std::chrono::duration<float> updateDuration) {
     }
 }
 
-void Camera::onKeyInput(GLFWwindow *window, int key, int action, int mods) {
+void Camera::keyCallback(GLFWwindow *window, int key, int action, int mods) {
     auto forwardKeyStatus = glfwGetKey(window, GLFW_KEY_W);
     auto backwardKeyStatus = glfwGetKey(window, GLFW_KEY_S);
     auto leftKeyStatus = glfwGetKey(window, GLFW_KEY_A);
@@ -53,7 +53,7 @@ void Camera::onKeyInput(GLFWwindow *window, int key, int action, int mods) {
     }
 }
 
-void Camera::onCursorMoved(GLFWwindow *window, double cursorX, double cursorY) {
+void Camera::cursorPositionCallback(GLFWwindow *window, double cursorX, double cursorY) {
     if (!firstCursorPositionReceived) {
         this->lastCursorX = cursorX;
         this->lastCursorY = cursorY;
@@ -73,7 +73,7 @@ void Camera::onCursorMoved(GLFWwindow *window, double cursorX, double cursorY) {
     this->lastCursorY = cursorY;
 }
 
-void Camera::onScrollInput(GLFWwindow *window, double xOffset, double yOffset) {
+void Camera::scrollCallback(GLFWwindow *window, double xOffset, double yOffset) {
     this->setCurrentFov(static_cast<float>(this->currentFov_deg -
                                            this->scrollSensitivity * yOffset));
 }

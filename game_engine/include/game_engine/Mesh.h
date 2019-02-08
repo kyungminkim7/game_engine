@@ -24,6 +24,7 @@ public:
     /// \param material Assimp material data to load for this mesh.
     /// \param textureDirectory Directory path containing all of the
     ///                         textures in this material.
+    /// \exception ge::LoadError Failed to load texture image from file.
     ///
     Mesh(const aiMesh &mesh, const aiMaterial &material, const std::string &textureDirectory);
 

@@ -11,6 +11,7 @@
 namespace ge {
 
 class Mesh;
+class ShaderProgram;
 
 ///
 /// \brief The GameObject class represents an object in the 3D virtual world.
@@ -49,7 +50,7 @@ public:
     void render(ShaderProgram *shader);
 
     ///
-    /// \brief onKeyInput Keyboard input controls.
+    /// \brief keyCallback Keyboard input controls.
     ///
     /// The base implementation does nothing.
     ///
@@ -58,10 +59,10 @@ public:
     /// \param action GLFW_PRESS, GLFW_RELEASE or GLFW_REPEAT.
     /// \param mods Bit field describing which modifier keys were held down.
     ///
-    virtual void onKeyInput(GLFWwindow *window, int key, int action, int mods);
+    virtual void keyCallback(GLFWwindow *window, int key, int action, int mods);
 
     ///
-    /// \brief onCursorMoved Controls based on cursor movement.
+    /// \brief cursorPositionCallback Controls based on cursor movement.
     ///
     /// The base implementation does nothing.
     ///
@@ -69,10 +70,10 @@ public:
     /// \param cursorX The new cursor x-coordinate, relative to the left edge of the client area.
     /// \param cursorY The new cursor y-coordinate, relative to the top edge of the client area.
     ///
-    virtual void onCursorMoved(GLFWwindow *window, double cursorX, double cursorY);
+    virtual void cursorPositionCallback(GLFWwindow *window, double cursorX, double cursorY);
 
     ///
-    /// \brief onScrollInput Controls based on scrolling input.
+    /// \brief scrollCallback Controls based on scrolling input.
     ///
     /// The base implementation does nothing.
     ///
@@ -80,7 +81,7 @@ public:
     /// \param xOffset The scroll offset along the x-axis.
     /// \param yOffset The scroll offset along the y-axis.
     ///
-    virtual void onScrollInput(GLFWwindow *window, double xOffset, double yOffset);
+    virtual void scrollCallback(GLFWwindow *window, double xOffset, double yOffset);
 
 
     glm::mat4 getModelMatrix() const;

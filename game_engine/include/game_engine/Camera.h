@@ -59,7 +59,7 @@ public:
     /// \param action GLFW_PRESS, GLFW_RELEASE or GLFW_REPEAT.
     /// \param mods Bit field describing which modifier keys were held down.
     ///
-    void onKeyInput(GLFWwindow *window, int key, int action, int mods) override;
+    void keyCallback(GLFWwindow *window, int key, int action, int mods) override;
 
     ///
     /// \brief Controls camera through cursor movement.
@@ -71,7 +71,7 @@ public:
     /// \param cursorX The new cursor x-coordinate, relative to the left edge of the client area.
     /// \param cursorY The new cursor y-coordinate, relative to the top edge of the client area.
     ///
-    void onCursorMoved(GLFWwindow *window, double cursorX, double cursorY) override;
+    void cursorPositionCallback(GLFWwindow *window, double cursorX, double cursorY) override;
 
     ///
     /// \brief onScrollInput Controls camera zoom through scrolling.
@@ -79,7 +79,7 @@ public:
     /// \param xOffset The scroll offset along the x-axis.
     /// \param yOffset The scroll offset along the y-axis.
     ///
-    void onScrollInput(GLFWwindow *window, double xOffset, double yOffset) override;
+    void scrollCallback(GLFWwindow *window, double xOffset, double yOffset) override;
 
     void setMaxFov(float fov_deg);
 
