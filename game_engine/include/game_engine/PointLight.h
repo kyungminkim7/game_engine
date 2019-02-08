@@ -2,7 +2,7 @@
 
 #include <array>
 
-#include "GameObject.h"
+#include "Light.h"
 
 namespace ge {
 
@@ -10,9 +10,10 @@ namespace ge {
 /// \brief The PointLight class represents a point light for use in generating
 /// omnidirectional shadows.
 ///
-class PointLight : public GameObject {
+class PointLight : public Light {
 public:
-    PointLight(float fov_deg, float aspectRatioWidthToHeight, float nearPlane, float farPlane);
+    PointLight(const glm::vec3 &ambient, const glm::vec3 &diffuse, const glm::vec3 &specular,
+            float fov_deg, float aspectRatioWidthToHeight, float nearPlane, float farPlane);
 
     ///
     /// \brief getShadowTransforms Returns the 6 combinations of perspective projection

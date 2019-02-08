@@ -11,6 +11,7 @@ add_library(${PROJECT_NAME} SHARED
     "src/GameObject.cpp"
     "src/InstancingGameObjects.cpp"
     "src/InstancingMesh.cpp"
+    "src/Light.cpp"
     "src/Mesh.cpp"
     "src/Model.cpp"
     "src/PointLight.cpp"

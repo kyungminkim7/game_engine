@@ -47,7 +47,7 @@ public:
     ///
     virtual void onUpdate(std::chrono::duration<float> updateDuration);
 
-    void render(ShaderProgram *shader);
+    virtual void render(ShaderProgram *shader);
 
     ///
     /// \brief keyCallback Keyboard input controls.
@@ -165,11 +165,14 @@ public:
 
     GameObject& setScale(const glm::vec3 &scale);
 
+    void setShininess(float shininess);
+
 private:
     using Meshes = std::vector<std::unique_ptr<ge::Mesh>>;
     Model model;
 
     std::shared_ptr<Meshes> meshes;
+    float shininess = 64.0f;
 };
 
 inline glm::mat4 GameObject::getModelMatrix() const {return this->model.getModelMatrix();}
@@ -237,6 +240,10 @@ inline GameObject& GameObject::translateInLocalFrame(const glm::vec3 &translatio
 inline GameObject& GameObject::setScale(const glm::vec3& scale) {
     this->model.setScale(scale);
     return *this;
+}
+
+inline void GameObject::setShininess(float shininess) {
+    this->shininess = shininess;
 }
 
 } // namespace ge

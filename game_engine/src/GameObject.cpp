@@ -11,6 +11,7 @@
 
 #include <game_engine/Exception.h>
 #include <game_engine/Mesh.h>
+#include <game_engine/ShaderProgram.h>
 
 namespace {
 
@@ -96,6 +97,8 @@ void GameObject::onUpdate(std::chrono::duration<float> updateDuration) {}
 
 void GameObject::render(ShaderProgram *shader) {
     this->model.render(shader);
+
+    shader->setUniform("material.shininess", this->shininess);
 
     for (const auto& mesh : *this->meshes) {
         mesh->render(shader);

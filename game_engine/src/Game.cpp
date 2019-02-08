@@ -81,9 +81,11 @@ Game::Game(unsigned int windowWidth, unsigned int windowHeight, const std::strin
                                          0.1f, 1000.0f);
 
     // Setup directional light
-    this->directionalLight = std::make_unique<DirectionalLight>(-10.0f, 10.0f, -10.0f, 10.0f, 0.1f, 500.0f);
-    this->directionalLight->setPosition({-10.0f, -10.0f, 100.0f})
-            .setLookAtPoint(glm::vec3(0.0f));
+    this->directionalLight = std::make_unique<DirectionalLight>(
+                glm::vec3(0.3f), glm::vec3(0.75f), glm::vec3(1.0f),
+                -10.0f, 10.0f, -10.0f, 10.0f, 0.1f, 500.0f);
+    this->directionalLight->setPosition({-10.0f, 10.0f, 10.0f})
+            .setLookAtPoint({0.0f, 0.0f, 0.0f});
 }
 
 void Game::init() {
@@ -123,10 +125,17 @@ void Game::render() {
             .bufferSubData(mat4Size_bytes, mat4Size_bytes, glm::value_ptr(this->cam->getProjectionMatrix()));
 
     this->defaultShader->use();
+
+    // Render light
+    this->defaultShader->setUniform("viewPosition", this->cam->getPosition());
+    this->directionalLight->render(this->defaultShader.get());
+
+    // Render world list
     for (auto &gameObject : this->worldList) {
         gameObject->render(this->defaultShader.get());
     }
 
+    // Render skybox
     if (this->skybox) {
         glDepthFunc(GL_LEQUAL);
         this->matricesUbo->bufferSubData(0, mat4Size_bytes, glm::value_ptr(glm::mat4(glm::mat3(viewMatrix))));

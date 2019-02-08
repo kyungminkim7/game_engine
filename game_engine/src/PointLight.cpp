@@ -6,9 +6,11 @@
 
 namespace ge {
 
-PointLight::PointLight(float fov_deg, float aspectRatioWidthToHeight,
+PointLight::PointLight(const glm::vec3 &ambient, const glm::vec3 &diffuse, const glm::vec3 &specular,
+                       float fov_deg, float aspectRatioWidthToHeight,
                        float nearPlane, float farPlane)
-    : fov_rad(glm::radians(fov_deg)), aspectRatioWidthToHeight(aspectRatioWidthToHeight),
+    : Light(ambient, diffuse, specular),
+      fov_rad(glm::radians(fov_deg)), aspectRatioWidthToHeight(aspectRatioWidthToHeight),
       nearPlane(nearPlane), farPlane(farPlane) {}
 
 std::array<glm::mat4, 6> PointLight::getShadowTransforms() const {
