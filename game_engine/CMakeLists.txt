@@ -7,6 +7,7 @@ find_package(glfw3 REQUIRED)
 add_library(${PROJECT_NAME} SHARED
     "src/Camera.cpp"
     "src/DirectionalLight.cpp"
+    "src/Game.cpp"
     "src/GameObject.cpp"
     "src/InstancingGameObjects.cpp"
     "src/InstancingMesh.cpp"
@@ -14,6 +15,7 @@ add_library(${PROJECT_NAME} SHARED
     "src/Model.cpp"
     "src/PointLight.cpp"
     "src/ShaderProgram.cpp"
+    "src/Skybox.cpp"
     "src/Texture2D.cpp"
     "src/UniformBuffer.cpp"
 )
