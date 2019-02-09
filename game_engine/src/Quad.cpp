@@ -1,6 +1,4 @@
-#include <game_engine/Plane.h>
-
-#include <algorithm>
+#include <game_engine/Quad.h>
 
 #include <game_engine/Mesh.h>
 
@@ -36,20 +34,15 @@ const std::vector<unsigned int> indices {
 
 namespace ge {
 
-Plane::Plane(const std::string &imageFilepath)
-    : GameObject(positions, normals, textureCoords, indices, imageFilepath),
-      imageFilepath(imageFilepath){}
-
-GameObject& Plane::setTextureRepeat(float numRepeat) {
-    std::vector<float> repeatTextureCoords;
-    repeatTextureCoords.reserve(textureCoords.size());
-    std::transform(textureCoords.cbegin(), textureCoords.cend(),
-                   std::back_inserter(repeatTextureCoords),
-                   [numRepeat](float tc){return tc * numRepeat;});
+Quad::Quad(const std::string &imageFilepath, const glm::vec2 &numTextureRepeat)
+    : GameObject() {
+    std::vector<float> repeatTextureCoords(textureCoords);
+    for (auto i = 0u; i < repeatTextureCoords.size(); ++i) {
+        repeatTextureCoords[i] *= (i % 2 == 0 ? numTextureRepeat.x : numTextureRepeat.y);
+    }
 
     this->setMesh(std::make_unique<Mesh>(positions, normals, repeatTextureCoords, indices,
                                          imageFilepath));
-    return *this;
 }
 
 } // namespace ge
