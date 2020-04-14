@@ -19,7 +19,7 @@ namespace ge {
 int Game::glContextMajorVersion = 3;
 int Game::glContextMinorVersion = 3;
 
-std::string Game::baseProjectPath = "../../";
+std::string Game::baseProjectPath = "../../../";
 std::string Game::shadersDir = "shaders/";
 std::string Game::modelsDir = "models/";
 std::string Game::skyboxesDir = "skyboxes/";
