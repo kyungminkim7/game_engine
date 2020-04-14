@@ -21,12 +21,12 @@ add_subdirectory(glfw)
 # glm library for linear algebra
 add_subdirectory(glm)
 
-# STB library for loading image files
+# stb library for loading image files
 add_library(stb INTERFACE)
 add_library(stb::stb ALIAS stb)
 
 target_include_directories(stb INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/stb>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/stb>
-    $<ISTALL_INTERFACE:stb>
+    $<INSTALL_INTERFACE:stb>
 )
