@@ -19,12 +19,6 @@ namespace ge {
 int Game::glContextMajorVersion = 3;
 int Game::glContextMinorVersion = 3;
 
-std::string Game::baseProjectPath = "../../../";
-std::string Game::shadersDir = "shaders/";
-std::string Game::modelsDir = "models/";
-std::string Game::skyboxesDir = "skyboxes/";
-std::string Game::imagesDir = "images/";
-
 std::unique_ptr<Game> Game::New(unsigned int windowWidth, unsigned int windowHeight,
                                 const std::string &windowTitle) {
     std::unique_ptr<Game> game(new Game(windowWidth, windowHeight, windowTitle));
@@ -68,11 +62,10 @@ Game::Game(unsigned int windowWidth, unsigned int windowHeight, const std::strin
     glViewport(0, 0, this->frameBufferWidth, this->frameBufferHeight);
 
     // Set up shaders
-    const auto shadersDirPath = baseProjectPath + shadersDir;
-    this->defaultShader = std::make_unique<ShaderProgram>(shadersDirPath + "default.vert",
-                                                          shadersDirPath + "default.frag");
-    this->skyboxShader = std::make_unique<ShaderProgram>(shadersDirPath + "skybox.vert",
-                                                         shadersDirPath + "skybox.frag");
+    this->defaultShader = std::make_unique<ShaderProgram>("shaders/default.vert",
+                                                          "shaders/default.frag");
+    this->skyboxShader = std::make_unique<ShaderProgram>("shaders/skybox.vert",
+                                                         "shaders/skybox.frag");
 
     this->matricesUbo = std::make_unique<UniformBuffer>(2 * mat4Size_bytes);
     this->defaultShader->setUniformBlockBinding(matricesUboName, this->matricesUbo->getBindingPoint());

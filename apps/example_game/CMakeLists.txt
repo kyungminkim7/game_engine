@@ -22,3 +22,11 @@ target_compile_features(${PROJECT_NAME} PRIVATE
     cxx_nullptr
     cxx_range_for
 )
+
+file(COPY
+        "${CMAKE_CURRENT_SOURCE_DIR}/images"
+        "${CMAKE_CURRENT_SOURCE_DIR}/models"
+        "${CMAKE_CURRENT_SOURCE_DIR}/shaders"
+        "${CMAKE_CURRENT_SOURCE_DIR}/skyboxes"
+    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+)

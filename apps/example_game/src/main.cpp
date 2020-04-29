@@ -22,9 +22,7 @@ int main() {
     return 0;
 }
 
-void setGlobalSettings() {
-    ge::Game::baseProjectPath += "game_engine/apps/example_game/";
-}
+void setGlobalSettings() { }
 
 void setGameCallbacks() {
     glfwSetFramebufferSizeCallback(game->getWindow(), &frameBufferSizeCallback);

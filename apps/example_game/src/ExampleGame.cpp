@@ -31,7 +31,7 @@ void ExampleGame::init() {
 
 void ExampleGame::loadWorld() {
     // Skybox
-    auto skyboxDirPath = baseProjectPath + skyboxesDir + "mountain_sky/";
+    const std::string skyboxDirPath = "skyboxes/mountain_sky/";
     std::array<std::string, 6> skyboxImageFilepaths {
         skyboxDirPath + "right.jpg",
         skyboxDirPath + "left.jpg",
@@ -43,7 +43,7 @@ void ExampleGame::loadWorld() {
     this->setSkybox(std::make_unique<Skybox>(skyboxImageFilepaths));
 
     // Nanosuit
-    auto nanosuit = std::make_shared<GameObject>(baseProjectPath + modelsDir + "nanosuit/nanosuit.obj");
+    auto nanosuit = std::make_shared<GameObject>("models/nanosuit/nanosuit.obj");
     nanosuit->setScale(glm::vec3{0.3f})
             .rotate(glm::radians(90.0f), {1.0f, 0.0f, 0.0f})
             .rotate(glm::radians(-90.0f), {0.0f, 0.0f, 1.0f})
@@ -53,7 +53,7 @@ void ExampleGame::loadWorld() {
 
     // Plane
     auto planeScale = 10.0f;
-    auto plane = std::make_shared<Quad>(baseProjectPath + imagesDir + "marble.jpg", glm::vec2(planeScale));
+    auto plane = std::make_shared<Quad>("images/marble.jpg", glm::vec2(planeScale));
     plane->setScale(glm::vec3(planeScale));
     this->pushBackInWorldList(plane);
 }

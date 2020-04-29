@@ -30,3 +30,4 @@ target_include_directories(stb INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/stb>
     $<INSTALL_INTERFACE:stb>
 )
+

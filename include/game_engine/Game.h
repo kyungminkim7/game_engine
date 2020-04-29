@@ -31,12 +31,6 @@ public:
     ///@{
     static int glContextMajorVersion;
     static int glContextMinorVersion;
-
-    static std::string baseProjectPath; ///< All subdirs are relative to this path.
-    static std::string shadersDir;
-    static std::string modelsDir;
-    static std::string skyboxesDir;
-    static std::string imagesDir;
     ///@}
 
     ///
